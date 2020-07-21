@@ -7,9 +7,16 @@ const mongoose = require('mongoose');
 const app = express()
 const port = 4444
 
+// Import routes
+const IndexRouter = require("../src/routes/index.routes")
+const BookRouter = require("../src/routes/books.routes")
+const AuthorRouter = require("../src/routes/author.routes")
 // view engine setup
 app.set('view engine', 'pug');
 app.set('views', 'views');
+
+// Static file
+app.use(express.static('public'))
 
 // Connect Database
  mongoose.connect(process.env.DATABASE_URL,{useUnifiedTopology: true,
@@ -21,9 +28,10 @@ app.set('views', 'views');
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ limit:'10mb' ,extended: false }));  
 
-const IndexRouter = require("../src/routes/index.routes")
 
-app.use(IndexRouter)
+app.use('/',IndexRouter)
+app.use('/books',BookRouter)
+app.use('/author',AuthorRouter)
 
 app.listen(port, () => {
     console.log(`Server listening ${port}`)
