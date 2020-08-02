@@ -1,0 +1,23 @@
+extends ../layouts/layout
+
+block content
+  div.container
+    h2 Search Book
+    form(action="/books" method="GET")
+      div 
+       label(for="title") Title 
+       input(placeholder="Title Book",type="text" name="title" value=searchOptions.title req)
+      div
+       div
+        label(for="published-after") Published After 
+        input( type="date" name="publishedAfter" value=searchOptions.publishedAfter)
+       div
+        label(for="published-before") Published Before 
+        input(type="date" name="publishedBefore" value=searchOptions.publishedBefore)
+      div
+        button(type="submit") Search
+    div.books
+      each book in books
+         a(href='/books/'+book.id)
+           img(src=book.ImageUrl, width="200")
+           h2= book.title

@@ -1,23 +1,21 @@
-  
-header  
- nav.navbar.navbar-default
+header
   .container
-    // Brand and toggle get grouped for better mobile display
-    .navbar-header
-      button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
-        span.sr-only Toggle navigation
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      a.navbar-brand(href='/' style='padding:0px') 
-        img(src='https://png.pngtree.com/templates_detail/20180917/book-library-education-logo-png_32062.jpg' width='50')
-    #bs-example-navbar-collapse-1.collapse.navbar-collapse
-      ul.nav.navbar-nav.navbar-right
-        li
-          a(href='/authors') Authors
-        li
-          a(href='/authors/new') Add Author
-        li
-          a(href='/books') Books
-        li
-          a(href='/books/new') Add Book    
+    .row
+      nav.navbar.navbar-expand-lg.navbar-light
+        a.navbar-brand(href='/')
+          img.img-fluid(src='https://png.pngtree.com/templates_detail/20180917/book-library-education-logo-png_32062.jpg', width='50')
+        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavDropdown', aria-controls='navbarNavDropdown', aria-expanded='false', aria-label='Toggle navigation')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        #navbarNavDropdown.collapse.navbar-collapse
+          ul.navbar-nav.justify-content-end
+            li
+              a.nav-link(href="/authors") Authors
+            li
+              a.nav-link(href="/authors/new") Add Author
+            li
+              a.nav-link(href="/books") Books
+            li
+              a.nav-link(href="/books/new") Add Book

@@ -2,8 +2,9 @@ if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config()
   }
 const express = require("express")
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
 const app = express()
 const port = 4444
 
@@ -13,10 +14,13 @@ const BookRouter = require("../src/routes/books.routes")
 const AuthorRouter = require("../src/routes/author.routes")
 // view engine setup
 app.set('view engine', 'pug');
-app.set('views', 'views');
+app.set('views', 'src/views');
 
 // Static file
-app.use(express.static('public'))
+app.use(express.static('src/public'))
+
+// Method Override
+app.use(methodOverride('_method'));
 
 // Connect Database
  mongoose.connect(process.env.DATABASE_URL,{useUnifiedTopology: true,
@@ -31,7 +35,7 @@ app.use(express.static('public'))
 
 app.use('/',IndexRouter)
 app.use('/books',BookRouter)
-app.use('/author',AuthorRouter)
+app.use('/authors',AuthorRouter)
 
 app.listen(port, () => {
     console.log(`Server listening ${port}`)

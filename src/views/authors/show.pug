@@ -1,0 +1,15 @@
+extends ../layouts/layout
+
+block content
+ div.container  
+  h2='Author: '+ author.name
+  div
+   a(href='/authors/'+author.id +'/edit', style='text-decoration: none; padding: 0 5px; font-size: 16px; display:flex') Edit
+   form(method="POST" action="/authors/" + author.id + "?_method=DELETE")
+      button(type='submit') Delete
+  if booksByAuthor.length > 0
+   h2(style='text-align:center; margin-bottom:30px') Books By Author
+   each book in booksByAuthor
+        a(href='/books/'+book.id)
+         img(src=book.ImageUrl, width="200")
+         h2= book.title

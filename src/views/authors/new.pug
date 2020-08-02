@@ -1,0 +1,12 @@
+extends ../layouts/layout
+
+block content
+   h2 New Author
+   if locals.errorMessage
+        = errorMessage
+   form(action="/authors" method="POST")
+     label(for="name") Name
+     input(placeholder="Name", type="text" name="name" value=author.name)
+     div
+      a(href="/authors") Cancel
+      button(type="submit") Create  

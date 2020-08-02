@@ -1,0 +1,41 @@
+extends ../layouts/layout
+block content
+
+ div.container  
+  if locals.errorMessage
+        = errorMessage
+  h2 Edit Books
+  form( action="/books/" + book.id + "?_method=PUT" method="POST"  enctype="multipart/form-data")
+     div
+      div
+        label(for="name" ) Title
+        input(placeholder="Title", type="text" name="title" value=book.title required)
+      div   
+        label(for="author") Author
+        select(name="author")
+          each author in authors 
+            if author.id === book.author
+              option(selected label=author.name, value=author.id)
+            else
+              option( label=author.name, value=author.id)
+     div
+      div
+        label(for="publish date") Publish Date
+        input(type="date" name="publishDate" required
+                    value= book.publishDate == null ? '' :
+                    book.publishDate.toISOString().split('T')[0])
+
+      div
+        label(for="page count") Page Count 
+        input(placeholder="Page Count",type="number" name="pageCount" min="1" value= book.pageCount required)                
+     div
+      div
+        label(for="coverImg") Image Cover
+        input(type="file" name="ImageUrl" required)                
+  
+      div
+       label(for="description") Description
+       textarea(name="description", book.description required)    
+     div
+        a(href="/books") Cancel
+        button(type="submit") Update
