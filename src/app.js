@@ -27,6 +27,7 @@ app.use(methodOverride('_method'));
   db.on('error', error => console.error(error))
   db.once('open', () => console.log('Connected to Database'))
 
+  // Body Parse
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ limit:'10mb' ,extended: false }));  
 
