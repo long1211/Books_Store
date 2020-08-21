@@ -13,7 +13,7 @@ cloudinary.config({
 })
 
 
-// GET home page. 
+// GET Books Page
 router.get('/', async (req, res, next) => {
     let query = Book.find()
 
@@ -38,28 +38,25 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-// Get New Book
+// Get New Books
 router.get('/new', async (req, res, next) => {
     try {
         const authors = await Author.find()
         const book = new Book()
 
-        const params = {
+        res.render('books/new', {
             authors: authors,
             book: book
-        }
-
-        res.render('books/new', params)
+        })
     } catch{
         res.redirect('/books')
     }
-
 });
 
-//  Post New Book
+// Create New Books
 router.post('/', upload.single('ImageUrl'), async (req, res) => {
     const result = await cloudinary.v2.uploader.upload(req.file.path)
-
+    const authors = await Author.find()
     const book = new Book({
         title: req.body.title,
         author: req.body.author,
@@ -73,47 +70,46 @@ router.post('/', upload.single('ImageUrl'), async (req, res) => {
         res.redirect(`books/${newBook.id}`)
     } catch{
         res.render('books/new', {
-            errorMessage: 'Error creating Author'
+            authors: authors,
+            book: book,
+            errorMessage: 'Error Creating Book'
         })
     }
 });
 
-// Show Books
+// Show Details Books
 router.get('/:id', async (req, res, next) => {
     try {
         const book = await Book.findById(req.params.id).populate('author').exec();
-        res.render('books/show',
-            {
-                book: book,
-
-            })
+        res.render('books/show', { book: book })
     } catch{
         res.redirect('/')
     }
 })
-// Edit
+
+// Get Update Books
 router.get('/:id/edit', async (req, res) => {
     try {
         const book = await Book.findById(req.params.id)
         const authors = await Author.find()
 
-        const params = {
+        res.render('books/edit', {
             authors: authors,
             book: book
-        }
-
-        res.render('books/edit', params)
+        })
     } catch {
-        res.redirect('/')
+        res.redirect('/books')
     }
 })
-// Update
+
+// Update Books
 router.put('/:id', upload.single('ImageUrl'), async (req, res, next) => {
     const result = await cloudinary.v2.uploader.upload(req.file.path)
+    const authors = await Author.find()
     let book
     try {
         book = await Book.findById(req.params.id)
-            book.title = req.body.title,
+        book.title = req.body.title,
             book.author = req.body.author,
             book.publishDate = new Date(req.body.publishDate),
             book.pageCount = req.body.pageCount,
@@ -122,12 +118,17 @@ router.put('/:id', upload.single('ImageUrl'), async (req, res, next) => {
         await book.save()
 
         res.redirect('/books')
-    } catch{     
-            res.redirect('/')
+
+    } catch{
+        res.render('books/edit', {
+            authors: authors,
+            book: book,
+            errorMessage: 'Error Updating Book'
+        })
     }
 })
 
-// Delete
+// Delete Books
 router.delete('/:id', async (req, res, next) => {
     let book
     try {
@@ -135,7 +136,14 @@ router.delete('/:id', async (req, res, next) => {
         await book.remove()
         res.redirect('/books')
     } catch{
-        res.redirect('/')
+        if (book != null) {
+            res.render('books/show', {
+                book: book,
+                errorMessage: 'Could not remove book'
+            })
+        } else {
+            res.redirect('/')
+        }
     }
 })
 module.exports = router

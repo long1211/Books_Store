@@ -3,12 +3,13 @@ block content
    div.container
     if locals.errorMessage
         = errorMessage
+
     h2 New Books
     form(action="/books" method="POST" enctype="multipart/form-data")
      div
       div
         label(for="name" ) Title
-        input(placeholder="Title", type="text" name="title" value=book.title required)
+        input(placeholder="Title", type="text" name="title" value=book.title )
       div   
         label(for="author") Author
         select(name="author")
@@ -26,7 +27,7 @@ block content
 
       div
         label(for="page count") Page Count 
-        input(placeholder="Page Count",type="number" name="pageCount" min="1" value= book.pageCount required)                
+        input(placeholder="Page Count",type="number" name="pageCount" min="1" value= book.pageCount )                
      div
       div
         label(for="coverImg") Image Cover
@@ -34,7 +35,7 @@ block content
   
       div
        label(for="description") Description
-       textarea(name="description", book.description, required)    
+       textarea(name="description", book.description )    
      div
             a(href="/books") Cancel
             button(type="submit") Create

@@ -1,6 +1,8 @@
 extends ../layouts/layout
 block content
    div.container
+       if locals.errorMessage
+          = errorMessage
        ul
         li
          a(href="") 
@@ -16,7 +18,7 @@ block content
         li publishDate:
           = book.publishDate.toDateString()
        div    
-         a(href='/books/'+ book.id +'/edit') Edit
+         a(href='/books/' + book.id +'/edit') Edit
          form(method="POST" action="/books/" + book.id + "?_method=DELETE")
            button(type='submit') Delete            
-         a(href='/authors/'+book.author.id) View Author
+         a(href='/authors/' + book.author.id) View Author

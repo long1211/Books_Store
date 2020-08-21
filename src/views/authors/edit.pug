@@ -1,9 +1,11 @@
 extends ../layouts/layout
 
 block content
-    h2 Edit Author
+  .container
     if locals.errorMessage
         = errorMessage
+
+    h2 Edit Author
     form(method="POST" action="/authors/" + author.id + "?_method=PUT")
       label(for="name") Name
       input(placeholder="Name", type="text" name="name" value=author.name)
