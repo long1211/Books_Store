@@ -1,15 +1,19 @@
 extends ../layouts/layout
 
 block content
- div.container  
-  h2='Author: '+ author.name
-  div
-   a(href='/authors/'+author.id +'/edit') Edit
-   form(method="POST" action="/authors/" + author.id + "?_method=DELETE")
-      button(type='submit') Delete
-  if booksByAuthor.length > 0
-   h2 Books By Author
-   each book in booksByAuthor
-        a(href='/books/'+book.id)
-         img(src=book.ImageUrl, width="200")
-         h2= book.title
+  .container  
+    h2='Author: '+ author.name
+    div
+      a(href='/authors/'+author.id +'/edit') Edit
+      form(method="POST" action="/authors/" + author.id + "?_method=DELETE")
+          button(type='submit') Delete
+        
+    if booksByAuthor.length > 0
+      h2 Books By Author
+      each book in booksByAuthor
+          a(href='/books/' + book.id)
+              img(src=book.ImageUrl, width="200")
+              h2= book.title
+    else
+      h2 No Books By Author
+          

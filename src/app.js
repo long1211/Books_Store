@@ -1,8 +1,8 @@
 require('dotenv').config()
 const express = require("express")
 const bodyParser = require('body-parser')
-const mongoose = require('mongoose');
-const methodOverride = require('method-override');
+const mongoose = require('mongoose')
+const methodOverride = require('method-override')
 const app = express()
 const port = 4444
 
@@ -32,9 +32,9 @@ app.use(methodOverride('_method'));
   app.use(bodyParser.urlencoded({ limit:'10mb' ,extended: false }));  
 
 
-app.use('/',IndexRouter)
-app.use('/books',BookRouter)
-app.use('/authors',AuthorRouter)
+app.use('/', IndexRouter)
+app.use('/books', BookRouter)
+app.use('/authors', AuthorRouter)
 
 app.listen(port, () => {
     console.log(`Server listening ${port}`)

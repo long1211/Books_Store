@@ -1,12 +1,12 @@
 extends ../layouts/layout
 
 block content
-  div.container
+  .container
     h2 Search Book
     form(action="/books" method="GET")
       div 
        label(for="title") Title 
-       input(placeholder="Title Book",type="text" name="title" value=searchOptions.title req)
+       input(placeholder="Title Book",type="text" name="title" value=searchOptions.title)
       div
        div
         label(for="published-after") Published After 

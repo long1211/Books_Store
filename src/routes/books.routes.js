@@ -33,7 +33,7 @@ router.get('/', async (req, res, next) => {
             books: books,
             searchOptions: req.query
         })
-    } catch{
+    } catch {
         res.redirect('/')
     }
 });
@@ -48,13 +48,13 @@ router.get('/new', async (req, res, next) => {
             authors: authors,
             book: book
         })
-    } catch{
+    } catch {
         res.redirect('/books')
     }
 });
 
 // Create New Books
-router.post('/', upload.single('ImageUrl'), async (req, res) => {
+router.post('/', upload.single('ImageUrl'), async (req, res, next) => {
     const result = await cloudinary.v2.uploader.upload(req.file.path)
     const authors = await Author.find()
     const book = new Book({
@@ -67,8 +67,9 @@ router.post('/', upload.single('ImageUrl'), async (req, res) => {
     })
     try {
         const newBook = await book.save()
+        // res.redirect('/books')
         res.redirect(`books/${newBook.id}`)
-    } catch{
+    } catch {
         res.render('books/new', {
             authors: authors,
             book: book,
@@ -81,14 +82,16 @@ router.post('/', upload.single('ImageUrl'), async (req, res) => {
 router.get('/:id', async (req, res, next) => {
     try {
         const book = await Book.findById(req.params.id).populate('author').exec();
-        res.render('books/show', { book: book })
-    } catch{
+        res.render('books/show', {
+            book: book
+        })
+    } catch {
         res.redirect('/')
     }
 })
 
 // Get Update Books
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', async (req, res, next) => {
     try {
         const book = await Book.findById(req.params.id)
         const authors = await Author.find()
@@ -119,7 +122,7 @@ router.put('/:id', upload.single('ImageUrl'), async (req, res, next) => {
 
         res.redirect('/books')
 
-    } catch{
+    } catch {
         res.render('books/edit', {
             authors: authors,
             book: book,
@@ -135,7 +138,7 @@ router.delete('/:id', async (req, res, next) => {
         book = await Book.findById(req.params.id)
         await book.remove()
         res.redirect('/books')
-    } catch{
+    } catch {
         if (book != null) {
             res.render('books/show', {
                 book: book,

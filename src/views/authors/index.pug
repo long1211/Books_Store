@@ -2,7 +2,7 @@ extends ../layouts/layout
 
 block content
  .container
-    h2.search-author Search Authors
+    h2 Search Authors
     form(action="/authors" method="GET" )
         label(for="name") Name
         input( type="text" name="name" value=searchOptions.name)
@@ -10,9 +10,8 @@ block content
     each author in authors
       ul 
         li= author.name
-        br
-        div
-        a(href='/authors/'+ author.id) View
-        a(href='/authors/'+author.id +'/edit') Edit
-        form(method="POST" action="/authors/" + author.id + "?_method=DELETE")
-          button(type='submit') Delete
+          div
+            a(href='/authors/' + author.id) View
+            a(href='/authors/' + author.id + '/edit') Edit
+            form(method="POST" action="/authors/" + author.id + "?_method=DELETE")
+              button(type='submit') Delete

@@ -3,6 +3,6 @@ block content
    div.container
       h2 Recently Added 
       each book in books
-        a(href='/books/'+book.id)
+        a(href='/books/' + book.id)
          img(src=book.ImageUrl, width="200")
          h2= book.title
