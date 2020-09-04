@@ -21,15 +21,20 @@ app.use(express.static('src/public'))
 app.use(methodOverride('_method'));
 
 // Connect Database
- mongoose.connect(process.env.DATABASE_URL,{useUnifiedTopology: true,
-   useNewUrlParser: true, })
- const db = mongoose.connection
-  db.on('error', error => console.error(error))
-  db.once('open', () => console.log('Connected to Database'))
+mongoose.connect(process.env.DATABASE_URL, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+})
+const db = mongoose.connection
+db.on('error', error => console.error(error))
+db.once('open', () => console.log('Connected to Database'))
 
-  // Body Parse
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ limit:'10mb' ,extended: false }));  
+// Body Parse
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  limit: '10mb',
+  extended: false
+}));
 
 
 app.use('/', IndexRouter)
@@ -37,5 +42,5 @@ app.use('/books', BookRouter)
 app.use('/authors', AuthorRouter)
 
 app.listen(port, () => {
-    console.log(`Server listening ${port}`)
+  console.log(`Server listening ${port}`)
 })

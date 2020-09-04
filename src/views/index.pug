@@ -1,7 +1,7 @@
 extends layouts/layout
 block content
-   div.container
-      h2 Recently Added 
+   .container
+      h2 Books Store 
       each book in books
         a(href='/books/' + book.id)
          img(src=book.ImageUrl, width="200")
