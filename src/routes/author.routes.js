@@ -32,15 +32,10 @@ router.get('/new', (req, res) => {
 
 // Create New Author  
 router.post('/', async (req, res) => {
-
-  const author = new Author({
-    name: req.body.name
-  })
+  const author = new Author({ name: req.body.name })
 
   // Kiểm tra name author có tồn tại hay không
-  const nameAuthor = await Author.findOne({
-    name: req.body.name
-  });
+  const nameAuthor = await Author.findOne({ name: req.body.name })
   if (nameAuthor) {
     return res.render('authors/new', {
       author: author,
@@ -92,14 +87,11 @@ router.get('/:id/edit', async (req, res) => {
 
 // Update Author
 router.put('/:id', async (req, res) => {
-  
   let author
   author = await Author.findById(req.params.id)
 
   // Kiểm tra name author có tồn tại hay không
-  const nameAuthor = await Author.findOne({
-    name: req.body.name
-  });
+  const nameAuthor = await Author.findOne({ name: req.body.name });
   if (nameAuthor) {
     return res.render('authors/edit', {
       author: author,

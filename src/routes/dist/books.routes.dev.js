@@ -290,6 +290,7 @@ router["delete"]('/:id', function _callee7(req, res, next) {
           _context7.prev = 9;
           _context7.t0 = _context7["catch"](0);
 
+          // Trong trường hợp mà trục trặc khi xóa thì sẽ thông báo mess
           if (book != null) {
             res.render('books/show', {
               book: book,

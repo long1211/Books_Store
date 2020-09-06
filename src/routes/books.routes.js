@@ -112,7 +112,7 @@ router.put('/:id', upload.single('ImageUrl'), async (req, res, next) => {
     let book
     try {
         book = await Book.findById(req.params.id)
-        book.title = req.body.title,
+            book.title = req.body.title,
             book.author = req.body.author,
             book.publishDate = new Date(req.body.publishDate),
             book.pageCount = req.body.pageCount,
@@ -139,6 +139,7 @@ router.delete('/:id', async (req, res, next) => {
         await book.remove()
         res.redirect('/books')
     } catch {
+        // Trong trường hợp mà trục trặc khi xóa thì sẽ thông báo mess
         if (book != null) {
             res.render('books/show', {
                 book: book,
@@ -149,4 +150,5 @@ router.delete('/:id', async (req, res, next) => {
         }
     }
 })
+
 module.exports = router

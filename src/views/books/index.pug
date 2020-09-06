@@ -16,7 +16,7 @@ block content
         input(type="date" name="publishedBefore" value=searchOptions.publishedBefore)
       div
         button(type="submit") Search
-    div.books
+    div
       each book in books
          a(href='/books/'+book.id)
            img(src=book.ImageUrl, width="200")

@@ -17,7 +17,7 @@ router.get('/', function _callee(req, res, next) {
           _context.next = 3;
           return regeneratorRuntime.awrap(Book.find().sort({
             createdAt: 'desc'
-          }).limit(10).exec());
+          }).limit(20).exec());
 
         case 3:
           books = _context.sent;

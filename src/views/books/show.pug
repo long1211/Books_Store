@@ -1,24 +1,23 @@
 extends ../layouts/layout
 block content
    .container
-       if locals.errorMessage
-          = errorMessage
+
        ul
-        li
-         a(href="") 
-          img(src=book.ImageUrl, width="200")
-        li Title:
-          =book.title
-        li Author:
-          = book.author.name  
-        li Description:
-          = book.description
-        li PageCount:
-          = book.pageCount
-        li publishDate:
-          = book.publishDate.toDateString()
+          li
+           a(href="") 
+             img(src=book.ImageUrl, width="200")
+          li Title:&nbsp;
+            = book.title
+          li Author:&nbsp;
+            = book.author.name  
+          li Description:&nbsp;
+            = book.description
+          li PageCount:&nbsp;
+            = book.pageCount
+          li publishDate:&nbsp;
+            = book.publishDate.toDateString()
        div    
-         a(href='/books/' + book.id +'/edit') Edit
-         form(method="POST" action="/books/" + book.id + "?_method=DELETE")
-           button(type='submit') Delete            
-         a(href='/authors/' + book.author.id) View Author
+          a(href='/books/' + book.id +'/edit') Edit
+          form(method="POST" action="/books/" + book.id + "?_method=DELETE")
+               button(type='submit') Delete            
+          a(href='/authors/' + book.author.id) View Author
