@@ -16,15 +16,23 @@ a:visited,
 a:focus {
     text-decoration: none;
 }
-label{
+
+label {
     font-weight: 700;
 }
-.h-30{
+
+.h-30 {
     height: 2rem;
 }
+
 /* Header */
 .navbar {
     width: 100%;
+}
+
+.navbar-light .navbar-toggler {
+    outline: none;
+    border: none;
 }
 
 /* Content */
