@@ -1,41 +1,41 @@
 extends ../layouts/layout
 block content
   .container
+    h2.title-h2 New Books
     if locals.errorMessage
-        = errorMessage
+        .alert.alert-danger= errorMessage
 
-    h2 New Books
     form(action="/books" method="POST" enctype="multipart/form-data")
-     div
-      div
-        label(for="name" ) Title
-        input(placeholder="Title", type="text" name="title" value=book.title )
-      div   
-        label(for="author") Author
-        select(name="author")
-          each author in authors 
-            if author.id === book.author
-              option(selected label=author.name, value=author.id)
-            else
-              option( label=author.name, value=author.id)
-     div
-      div
-        label(for="publish date") Publish Date
-        input(type="date" name="publishDate" 
-                    value= book.publishDate == null ? '' :
-                    book.publishDate.toISOString().split('T')[0])
-
-      div
-        label(for="page count") Page Count 
-        input(placeholder="Page Count",type="number" name="pageCount" min="1" value= book.pageCount )                
-     div
-      div
-        label(for="coverImg") Image Cover
-        input(type="file" name="ImageUrl" required)                
-  
-      div
-       label(for="description") Description
-       textarea(name="description", book.description )    
-     div
-            a(href="/books") Cancel
-            button(type="submit") Create
+        .form-row
+          .form-group.col-md-6
+            label(for="name" ) Title
+            input(class="form-control" placeholder="Title", type="text" name="title" value=book.title )
+          .form-group.col-md-6   
+            label(for="author") Author
+            select(name="author" class="form-control")
+              each author in authors 
+                if author.id === book.author
+                  option(selected label=author.name, value=author.id)
+                else
+                  option( label=author.name, value=author.id)
+        
+        .form-row
+          .form-group.col-md-6
+            label(for="publish date") Publish Date
+            input(type="date" name="publishDate" class="form-control"
+                        value= book.publishDate == null ? '' :
+                        book.publishDate.toISOString().split('T')[0])
+          .form-group.col-md-6
+            label(for="page count") Page Count 
+            input(class="form-control" placeholder="Page Count",type="number" name="pageCount" min="1" value= book.pageCount )                
+    
+        .form-row
+          .form-group.col-md-6
+            label(for="coverImg") Image Cover
+            input( type="file" name="ImageUrl" class="form-control p-0 h-30" required)                     
+          .form-group.col-md-6
+            label(for="description") Description
+            textarea( class="form-control" name="description", book.description )    
+        .d-flex.justify-content-end
+                a(href="/books" class="d-flex align-items-center pr-2") Cancel
+                button(type="submit" class="btn btn-primary") Create

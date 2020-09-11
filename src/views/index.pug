@@ -1,8 +1,11 @@
 extends layouts/layout
 block content
    .container
-      h2 Books Store 
-      each book in books
-        a(href='/books/' + book.id)
-         img(src=book.ImageUrl, width="200")
-         h2= book.title
+      h2.title-h2 Books Store 
+      .row   
+         each book in books
+            .col-lg-3.col-12
+               .item-wrapper
+                  a(href='/books/' + book.id)
+                     img(src=book.ImageUrl, class="img-item")
+                     h3.item-text= book.title

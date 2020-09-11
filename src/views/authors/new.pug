@@ -2,13 +2,16 @@ extends ../layouts/layout
 
 block content
  .container 
-   if locals.errorMessage
-        = errorMessage
-        
-   h2 New Author     
-   form(action="/authors" method="POST")
-     label(for="name") Name
-     input(placeholder="Name", type="text" name="name" value=author.name)
-     div
-      a(href="/authors") Cancel
-      button(type="submit") Create  
+   h2.title-h2 New Author  
+   .row
+      .col-lg-4
+      .col-lg-4.col-12  
+          if locals.errorMessage
+                .alert.alert-danger= errorMessage        
+          form(action="/authors" method="POST")
+            label(for="name") Name Author
+            input(class="form-control mb-2", placeholder="Name Author", type="text" name="name" value=author.name)
+            .d-flex.float-right
+              a(href="/authors" class="d-flex align-items-center pr-2") Cancel
+              button(type="submit" class="btn btn-primary") Create  
+      .col-lg-4      

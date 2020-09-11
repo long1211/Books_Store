@@ -78,7 +78,7 @@ router.post('/', function _callee2(req, res) {
 
           return _context2.abrupt("return", res.render('authors/new', {
             author: author,
-            errorMessage: 'Author already exists'
+            errorMessage: 'Author Already Exists'
           }));
 
         case 6:
@@ -203,7 +203,7 @@ router.put('/:id', function _callee5(req, res) {
 
           return _context5.abrupt("return", res.render('authors/edit', {
             author: author,
-            errorMessage: 'Author already exists'
+            errorMessage: 'Author Already Exists'
           }));
 
         case 8:
@@ -226,7 +226,7 @@ router.put('/:id', function _callee5(req, res) {
           } else {
             res.render('authors/edit', {
               author: author,
-              errorMessage: 'Error updating Author'
+              errorMessage: 'Error Updating Author'
             });
           }
 

@@ -2,16 +2,21 @@ extends ../layouts/layout
 
 block content
  .container
-    h2 Search Authors
-    form(action="/authors" method="GET" )
-        label(for="name") Name
-        input( type="text" name="name" value=searchOptions.name)
-        button(type="submit") Search
-    each author in authors
-      ul 
-        li= author.name
-          div
-            a(href='/authors/' + author.id) View
-            a(href='/authors/' + author.id + '/edit') Edit
-            form(method="POST" action="/authors/" + author.id + "?_method=DELETE")
-              button(type='submit') Delete
+    h2.title-h2 Search Authors
+    .row
+        .col-lg-4
+        .col-lg-4.col-12
+            form(action="/authors" method="GET" class="d-flex")
+                input( type="text" name="name" placeholder="Name Author" class="form-control" value=searchOptions.name)
+                button(type="submit" class="btn btn-primary mb-2") Search
+        .col-lg-4
+    .row.mt-5    
+        each author in authors
+            .col-lg-3.col-6.mb-3
+                h4.text-center.text-capitalize= author.name
+                .d-flex.justify-content-center
+                  a(href='/authors/' + author.id, class="pr-2") View
+                  a(href='/authors/' + author.id + '/edit') Edit
+                .d-flex.justify-content-center  
+                  form(method="POST" action="/authors/" + author.id + "?_method=DELETE")
+                        button(type='submit' class="btn btn-danger") Delete

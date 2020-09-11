@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
   if (nameAuthor) {
     return res.render('authors/new', {
       author: author,
-      errorMessage: 'Author already exists'
+      errorMessage: 'Author Already Exists'
     })
   }
 
@@ -95,7 +95,7 @@ router.put('/:id', async (req, res) => {
   if (nameAuthor) {
     return res.render('authors/edit', {
       author: author,
-      errorMessage: 'Author already exists'
+      errorMessage: 'Author Already Exists'
     })
   }
 
@@ -110,7 +110,7 @@ router.put('/:id', async (req, res) => {
     } else {
       res.render('authors/edit', {
         author: author,
-        errorMessage: 'Error updating Author'
+        errorMessage: 'Error Updating Author'
       })
     }
   }
@@ -124,7 +124,6 @@ router.delete('/:id', async (req, res) => {
     await author.remove()
     res.redirect('/authors')
   } catch {
-
     res.redirect(`/authors/${author.id}`)
 
   }

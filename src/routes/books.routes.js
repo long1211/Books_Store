@@ -139,15 +139,7 @@ router.delete('/:id', async (req, res, next) => {
         await book.remove()
         res.redirect('/books')
     } catch {
-        // Trong trường hợp mà trục trặc khi xóa thì sẽ thông báo mess
-        if (book != null) {
-            res.render('books/show', {
-                book: book,
-                errorMessage: 'Could not remove book'
-            })
-        } else {
-            res.redirect('/')
-        }
+        res.redirect(`/books/${book.id}`)
     }
 })
 

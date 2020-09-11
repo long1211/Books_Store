@@ -2,18 +2,21 @@ extends ../layouts/layout
 
 block content
   .container  
-    h2='Author: '+ author.name
-    div
-      a(href='/authors/'+author.id +'/edit') Edit
+    h3.mt-4='Author: '+ author.name
+    .d-flex
+      a(href='/authors/'+author.id +'/edit' class="d-flex align-items-center pr-2") Edit
       form(method="POST" action="/authors/" + author.id + "?_method=DELETE")
-          button(type='submit') Delete
+          button(type='submit' class="btn btn-danger") Delete
         
     if booksByAuthor.length > 0
-      h2 Books By Author
-      each book in booksByAuthor
-          a(href='/books/' + book.id)
-              img(src=book.ImageUrl, width="200")
-              h2= book.title
+      h2.title-h2.mt-4 Books By Author
+      .row  
+        each book in booksByAuthor
+          .col-lg-3.col-12
+            .item-wrapper
+              a(href='/books/' + book.id)
+                  img(src=book.ImageUrl,class="img-item")
+                  h3.item-text= book.title
     else
-      h2 No Books By Author
+      h2.title-h2.mt-4 No Books By Author
           

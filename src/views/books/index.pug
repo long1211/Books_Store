@@ -2,22 +2,24 @@ extends ../layouts/layout
 
 block content
   .container
-    h2 Search Book
-    form(action="/books" method="GET")
-      div 
+    h2.title-h2 Search Books
+    form.form-group(action="/books" method="GET")
+      .form-group
        label(for="title") Title 
-       input(placeholder="Title Book",type="text" name="title" value=searchOptions.title)
-      div
-       div
-        label(for="published-after") Published After 
-        input( type="date" name="publishedAfter" value=searchOptions.publishedAfter)
-       div
-        label(for="published-before") Published Before 
-        input(type="date" name="publishedBefore" value=searchOptions.publishedBefore)
-      div
-        button(type="submit") Search
-    div
+       input(placeholder="Title Book",type="text" name="title" class="form-control" value=searchOptions.title)
+      .form-row
+        .form-group.col-md-6
+          label(for="published-after") Published After 
+          input( type="date" name="publishedAfter" class="form-control" value=searchOptions.publishedAfter)
+        .form-group.col-md-6
+          label(for="published-before") Published Before 
+          input(type="date" name="publishedBefore" class="form-control" value=searchOptions.publishedBefore) 
+      button(type="submit" class="btn btn-primary") Search
+ 
+    .row.mt-5  
       each book in books
-         a(href='/books/'+book.id)
-           img(src=book.ImageUrl, width="200")
-           h2= book.title
+        .col-lg-3.col-12
+          .item-wrapper
+              a(href='/books/'+book.id)
+                img(src=book.ImageUrl, class="img-item")
+                h3.item-text= book.title
