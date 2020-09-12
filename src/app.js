@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const methodOverride = require('method-override')
 const app = express()
-const port = 4444
+// const port = 4444
 
 // Import routes
 const IndexRouter = require("../src/routes/index.routes")
@@ -41,6 +41,8 @@ app.use('/', IndexRouter)
 app.use('/books', BookRouter)
 app.use('/authors', AuthorRouter)
 
-app.listen(port, () => {
-  console.log(`Server listening ${port}`)
-})
+// app.listen(port, () => {
+//   console.log(`Server listening ${port}`)
+// })
+
+app.listen(process.env.PORT || 4444)
